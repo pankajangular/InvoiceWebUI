@@ -60,12 +60,26 @@ export class AuthenticationService {
       }));
   }
 
+  changePassword(user: User) {
+    debugger;
+    return this.http.post<any>(environment.apiUrl + '/' + ApiEndPoint.changePassword, user)
+      .pipe(map(user => {
+
+        if (user) {
+          console.log(user);
+        }
+        else {
+          this.toaster.error(user.message);
+        }
+        return user.userstatus;
+      }));
+  }
+
 
 
   resetPassword(code: number, email: string, password: string) {
     return this.http.post<any>(environment.apiUrl + '/' + ApiEndPoint.resetPassword, { code, email, password })
       .pipe(map(user => {
-        console.log('from auth service', user);
         if (user.userstatus == true) {
           this.toaster.success(user.message);
         }

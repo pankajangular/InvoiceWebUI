@@ -88,7 +88,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 4000,
-      positionClass: 'toast-top-left',
+      positionClass: 'toast-bottom-right',
 
     })
   ],
