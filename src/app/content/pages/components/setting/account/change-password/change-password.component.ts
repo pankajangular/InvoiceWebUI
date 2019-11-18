@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AuthenticationService } from 'src/app/core';
+import { first } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
 @Component({
   selector: 'app-change-password',
@@ -18,7 +20,6 @@ export class ChangePasswordComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
     private spinner: NgxSpinnerService,
     private authenticationService: AuthenticationService,
   ) { }
@@ -36,8 +37,7 @@ export class ChangePasswordComponent implements OnInit {
 
   checkIfMatchingPasswords(passwordKey: string, passwordConfirmationKey: string) {
     return (group: FormGroup) => {
-      let passwordInput = group.controls[passwordKey],
-        passwordConfirmationInput = group.controls[passwordConfirmationKey];
+      let passwordInput = group.controls[passwordKey], passwordConfirmationInput = group.controls[passwordConfirmationKey];
       if (passwordInput.value !== passwordConfirmationInput.value) {
         return passwordConfirmationInput.setErrors({ notEquivalent: true })
       }
@@ -46,5 +46,20 @@ export class ChangePasswordComponent implements OnInit {
       }
     }
   }
+  onChangePassword() {
+    this.submitted = true;
+    if (this.changePasswordForm.invalid) {
+      return;
+    }
 
+    this.spinner.show();
+    setTimeout(() => {
+      this.authenticationService.changePassword(this.changePasswordForm.value)
+        .pipe(first())
+        .subscribe(
+          data => {
+            this.spinner.hide();
+          });
+    }, 2000);
+  }
 }

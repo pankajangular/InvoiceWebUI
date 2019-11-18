@@ -27,7 +27,11 @@ import {
   SignatureComponent,
   MembershipComponent,
   InvitePeopleComponent,
-  ContactUsComponent
+  ContactUsComponent,
+  CreateInvoiceComponent,
+  QuotationsComponent,
+  TimeRecordingComponent,
+  InvoiceComponent
 } from './content/pages/components';
 
 
@@ -40,11 +44,12 @@ import { FooterComponent, HeaderComponent, AsideComponent } from './content/layo
 
 
 //Core Folder Content
-import { OnlyNumber, ErrorInterceptor, JwtInterceptor } from './core';
-
+import { OnlyNumber } from './core/directives/onlyNumber.directive';
+import { JwtInterceptor } from './core/helpers';
 
 //External NPM Packages
 import { NgxSpinnerModule } from "ngx-spinner";
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 @NgModule({
@@ -76,11 +81,16 @@ import { NgxSpinnerModule } from "ngx-spinner";
     MembershipComponent,
     InvitePeopleComponent,
     ContactUsComponent,
+    CreateInvoiceComponent,
+    QuotationsComponent,
+    TimeRecordingComponent,
+    InvoiceComponent,
   ],
   imports: [
     BrowserModule,
     NgbModule,
     FormsModule,
+    NgxDatatableModule,
     ReactiveFormsModule,
     AppRoutingModule,
     NgxSpinnerModule,
@@ -94,7 +104,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
     // provider used to create fake backend
   ],
   bootstrap: [AppComponent]

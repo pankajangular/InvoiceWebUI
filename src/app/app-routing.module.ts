@@ -10,7 +10,7 @@ import { OtpComponent } from './content/pages/auth/otp/otp.component';
 import { AuthGuard } from './core/helpers/auth.guard';
 import { PageNotFoundComponent } from './content/pages/auth/page-not-found/page-not-found.component';
 import { ResetPasswordComponent } from './content/pages/auth/reset-password/reset-password.component';
-import { LinkedUserComponent, CurrencyComponent, EditProfileComponent, ChangePasswordComponent, LogsComponent, CustomerInvoiceComponent, TaxComponent, ItemsComponent, StatementComponent, SignatureComponent, MembershipComponent, InvitePeopleComponent, ContactUsComponent } from './content/pages/components';
+import { LinkedUserComponent, CurrencyComponent, EditProfileComponent, ChangePasswordComponent, LogsComponent, CustomerInvoiceComponent, TaxComponent, ItemsComponent, StatementComponent, SignatureComponent, MembershipComponent, InvitePeopleComponent, ContactUsComponent, CreateInvoiceComponent, QuotationsComponent, TimeRecordingComponent, InvoiceComponent } from './content/pages/components';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -90,6 +90,22 @@ const routes: Routes = [
   {
     path: 'contact-us',
     component: ContactUsComponent,
+  },
+  {
+    path: 'invoice',
+    component: InvoiceComponent
+  },
+  {
+    path: 'create-invoice',
+    component: CreateInvoiceComponent
+  },
+  {
+    path: 'quotations',
+    component: QuotationsComponent,
+  },
+  {
+    path: 'time-recording',
+    component: TimeRecordingComponent
   },
 
   //Page Not Found Routing

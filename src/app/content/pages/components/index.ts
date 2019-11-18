@@ -17,3 +17,10 @@ export * from './setting/invoice/statement/statement.component';
 export * from './setting/invoice/tax/tax.component';
 export * from './setting/other/contact-us/contact-us.component';
 export * from './setting/other/invite-people/invite-people.component'
+
+
+// Income Folder Exports
+export * from './income/create-invoice/create-invoice.component';
+export * from './income/quotations/quotations.component';
+export * from './income/time-recording/time-recording.component'
+export * from './income/invoice/invoice.component'

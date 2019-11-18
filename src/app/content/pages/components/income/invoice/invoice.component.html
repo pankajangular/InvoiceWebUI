@@ -1,0 +1,41 @@
+<!--Body Start -->
+<section class="body-wrap">
+  <div class="row m-0">
+    <div class="col-md-12 p-0">
+      <div class="body-content">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Invoice List</li>
+          </ol>
+          <ol class="breadcrumb float-right">
+            <!-- <li class="breadcrumb-item active" aria-current="page">Invoice List</li> -->
+            <button class="btn btn-primary " [routerLink]="['/create-invoice']">Create New Invoice</button>
+
+          </ol>
+        </nav>
+        <div class="content-element">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Invoice Number</th>
+                <th scope="col">Personal Email</th>
+                <th scope="col">Date</th>
+                <th scope="col">Due Date</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let item of InvoiceList">
+              <tr>
+                <td>{{item.invoiceNumber}}</td>
+                <td>{{item.personalEmail}}</td>
+                <td>{{item.date}}</td>
+                <td>{{item.dueDate}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--
+Body End -->

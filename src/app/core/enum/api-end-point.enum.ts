@@ -5,5 +5,6 @@ export enum ApiEndPoint {
   forgotPassword = 'Account/ForgotPassword',
   resetPassword = 'Account/ResetPassword',
   changePassword = 'Account/ChangePassword',
-  linkedUsers = 'User/LinkedUsers'
+  linkedUsers = 'User/LinkedUsers',
+  invoiceList = 'Invoice/InvoiceList'
 }

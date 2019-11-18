@@ -13,12 +13,42 @@
         <i class="i fas fa-tachometer-alt"></i>
       </a>
     </li>
-    <!-- <li>
-       <a [routerLink]="['/invoice']" routerLinkActive="router-link-active">
-         <span>Invoices Management</span>
-         <img class="i" src="assets/images/incoming.png">
-       </a>
-     </li> -->
+    <div class="accordion" id="accordionExample">
+      <li id="headingOne">
+        <a class="active" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+          aria-controls="collapseTwo">
+          <span>Income</span>
+          <div class="icon-arrow">
+            <img src="assets/images/dollar.png" class="i">
+            <i class="fa fa-caret-down" aria-hidden="true"></i>
+          </div>
+        </a>
+      </li>
+      <div id="collapseTwo" class="collapse accordion-collapse-menu" aria-labelledby="headingOne"
+        data-parent="#accordionExample">
+        <ul class="accordion" id="accordionExample-inner">
+          <div aria-labelledby="headingOne-inner" data-parent="#accordionExample-inner">
+            <ul class="collapse-inner-2">
+              <li>
+                <a [routerLink]="['/invoice']" routerLinkActive="router-link-active">
+                  <span> Invoice</span>
+                </a>
+              </li>
+              <li>
+                <a [routerLink]="['/quotations']" routerLinkActive="router-link-active">
+                  <span>Quotations</span>
+                </a>
+              </li>
+              <li>
+                <a [routerLink]="['/time-recording']" routerLinkActive="router-link-active">
+                  <span>Time Recording</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </ul>
+      </div>
+    </div>
     <li>
       <a [routerLink]="['/vendor-management']" routerLinkActive="router-link-active">
         <span>Vendor Management</span>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SettingService } from 'src/app/core/services/setting.service';
 
 @Component({
   selector: 'app-linked-user',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LinkedUserComponent implements OnInit {
 
-  constructor() { }
+  linkedUsersList: [];
+
+
+  constructor(private settingService: SettingService) { }
 
   ngOnInit() {
+    this.settingService.getAllLinkedUsers().subscribe((data) => {
+      console.log(data);
+      this.linkedUsersList = data;
+    })
   }
 
 }

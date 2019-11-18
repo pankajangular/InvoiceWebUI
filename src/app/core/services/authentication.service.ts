@@ -12,14 +12,14 @@ import { ToastrService } from 'ngx-toastr';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
+  public currentUser: Observable<any>;
 
   constructor(private http: HttpClient, private router: Router, private toaster: ToastrService) {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): User {
+  public get currentUserValue(): any {
     return this.currentUserSubject.value;
   }
 
@@ -28,7 +28,7 @@ export class AuthenticationService {
       .pipe(map(user => {
 
         if (user.userstatus) {
-          localStorage.setItem('currentUser', JSON.stringify(user.user_info.accessToken));
+          localStorage.setItem('currentUser', JSON.stringify(user.user_info));
           this.currentUserSubject.next(user.userstatus);
           this.toaster.success(user.message);
         }
@@ -61,12 +61,11 @@ export class AuthenticationService {
   }
 
   changePassword(user: User) {
-    debugger;
     return this.http.post<any>(environment.apiUrl + '/' + ApiEndPoint.changePassword, user)
       .pipe(map(user => {
 
-        if (user) {
-          console.log(user);
+        if (user.success == true) {
+          this.toaster.success(user.message)
         }
         else {
           this.toaster.error(user.message);
