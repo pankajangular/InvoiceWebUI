@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
 import { ToastrService } from 'ngx-toastr';
@@ -39,7 +38,6 @@ export class RegisterComponent implements OnInit {
     this.spinner.show();
     setTimeout(() => {
       this.userService.register(this.registerForm.value)
-        .pipe(first())
         .subscribe(
           data => {
             if (data.success == true) {

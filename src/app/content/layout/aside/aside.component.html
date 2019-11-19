@@ -13,7 +13,7 @@
         <i class="i fas fa-tachometer-alt"></i>
       </a>
     </li>
-    <div class="accordion" id="accordionExample">
+    <!-- <div class="accordion" id="accordionExample">
       <li id="headingOne">
         <a class="active" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
           aria-controls="collapseTwo">
@@ -48,7 +48,13 @@
           </div>
         </ul>
       </div>
-    </div>
+    </div> -->
+    <li>
+      <a [routerLink]="['/invoice']" routerLinkActive="router-link-active">
+        <span>Income</span>
+        <img class="i" src="assets/images/us-dollar.png">
+      </a>
+    </li>
     <li>
       <a [routerLink]="['/vendor-management']" routerLinkActive="router-link-active">
         <span>Vendor Management</span>

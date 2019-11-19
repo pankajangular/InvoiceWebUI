@@ -1,0 +1,109 @@
+<!--Body Start -->
+<section class="body-wrap">
+  <div class="row m-0">
+    <div class="col-md-12 p-0">
+      <div class="body-content">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Create Customer</li>
+          </ol>
+          <button class="btn btn-primary float-right" [routerLink]="['/invoice']">Back</button>
+        </nav>
+        <div class="content-element">
+          <div class="col-md-6 p-0" align="center">
+            <div class="invoice-formin">
+              <form class="invoice-form" name="customerForm" [formGroup]="customerForm"
+                (ngSubmit)="customerForm.valid && onCreateCustomer()">
+                <div class="form-group input-effect">
+                  <input type="text" class="form-control" formControlName="bussinessName"
+                    placeholder="Enter Customer or Business Name " [ngClass]="{'is-invalid':customerForm.get('bussinessName').touched &&
+                        customerForm.get('bussinessName').invalid}" />
+                  <div *ngIf="customerForm.get('bussinessName').touched && customerForm.get('bussinessName').invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="customerForm.get('bussinessName').errors.required">Customer is required</div>
+                  </div>
+                </div>
+                <div class="form-group input-effect">
+                  <input class="form-control" formControlName="personalEmail"
+                    placeholder="Enter  Enter Valid personalEmail" [ngClass]="{'is-invalid':customerForm.get('personalEmail').touched &&
+                    customerForm.get('personalEmail').invalid}">
+                  <div *ngIf="customerForm.get('personalEmail').touched && customerForm.get('personalEmail').invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="customerForm.get('personalEmail').errors.required">personalEmail is required</div>
+                    <div *ngIf="customerForm.get('personalEmail').errors.email">Email must be a valid email address
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group input-effect">
+                  <input type="text" class="form-control" formControlName="firstName" placeholder="Enter First Name"
+                    [ngClass]="{'is-invalid':customerForm.get('firstName').touched &&
+                    customerForm.get('firstName').invalid}" />
+                  <div *ngIf="customerForm.get('firstName').touched && customerForm.get('firstName').invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="customerForm.get('firstName').errors.required">firstName is required</div>
+                  </div>
+                </div>
+                <div class="form-group input-effect">
+                  <input type="text" class="form-control" formControlName="lastName" placeholder="Enter Last Name"
+                    [ngClass]="{'is-invalid':customerForm.get('lastName').touched &&
+                    customerForm.get('lastName').invalid}" />
+                  <div *ngIf="customerForm.get('lastName').touched && customerForm.get('lastName').invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="customerForm.get('lastName').errors.required">lastName is required</div>
+                  </div>
+                </div>
+                <div class="form-group input-effect">
+                  <input type="text" class="form-control" formControlName="phone" placeholder="Enter Phone Number"
+                    [ngClass]="{'is-invalid':customerForm.get('phone').touched &&
+                    customerForm.get('phone').invalid}" />
+                  <div *ngIf="customerForm.get('phone').touched && customerForm.get('phone').invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="customerForm.get('phone').errors.required">lastName is required</div>
+                  </div>
+                </div>
+                <div class="form-group input-effect">
+                  <input type="text" class="form-control" formControlName="mobile" placeholder="Enter Mobile Number"
+                    [ngClass]="{'is-invalid':customerForm.get('mobile').touched &&
+                    customerForm.get('mobile').invalid}" />
+                  <div *ngIf="customerForm.get('mobile').touched && customerForm.get('mobile').invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="customerForm.get('mobile').errors.required">mobile is required</div>
+                  </div>
+                </div>
+
+                <div class="form-group input-effect">
+                  <input type="text" class="form-control" formControlName="address1" placeholder="Enter address1"
+                    [ngClass]="{'is-invalid':customerForm.get('address1').touched
+                        &&
+                    customerForm.get('address1').invalid}" />
+                  <div *ngIf="customerForm.get('address1').touched && customerForm.get('address1').invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="customerForm.get('address1').errors.required">address1 is required</div>
+                  </div>
+                </div>
+
+
+                <div class="form-group input-effect">
+                  <input type="text" class="form-control" formControlName="website"
+                    placeholder="Enter Valid Website Url" [ngClass]="{'is-invalid':customerForm.get('website').touched
+                        &&
+                    customerForm.get('website').invalid}" />
+                  <div *ngIf="customerForm.get('website').touched && customerForm.get('website').invalid"
+                    class="invalid-feedback">
+                    <div *ngIf="customerForm.get('website').errors.required">website is required</div>
+                  </div>
+                </div>
+                <div class="form-group text-center">
+                  <button class="btn btn-primary" [disabled]="!customerForm.valid" class="btn btn-primary">Create
+                    Customer</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--
+Body End -->

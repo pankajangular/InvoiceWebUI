@@ -28,11 +28,14 @@ export class AuthenticationService {
       .pipe(map(user => {
 
         if (user.userstatus) {
+          debugger;
           localStorage.setItem('currentUser', JSON.stringify(user.user_info));
           this.currentUserSubject.next(user.userstatus);
           this.toaster.success(user.message);
         }
         else {
+          debugger;
+          this.router.navigateByUrl('./login');
           this.toaster.error(user.message);
         }
         return user.userstatus;

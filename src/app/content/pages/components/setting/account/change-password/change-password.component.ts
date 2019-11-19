@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { first } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
 @Component({
@@ -55,7 +52,6 @@ export class ChangePasswordComponent implements OnInit {
     this.spinner.show();
     setTimeout(() => {
       this.authenticationService.changePassword(this.changePasswordForm.value)
-        .pipe(first())
         .subscribe(
           data => {
             this.spinner.hide();

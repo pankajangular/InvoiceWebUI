@@ -14,4 +14,15 @@ export class IncomeService {
   getInvoiceList(data: any): Observable<any> {
     return this.http.post<any>(environment.apiUrl + '/' + ApiEndPoint.invoiceList, data);
   }
+
+  createNewItem(name: string, description: string, quantity: number, price: number, tax: number) {
+    debugger;
+    return this.http.post<any>(environment.apiUrl + '/' + ApiEndPoint.addNewItem, { name, description, quantity, price, tax });
+  }
+
+  createCustomer(data: any) {
+    debugger;
+    return this.http.post<any>(environment.apiUrl + '/' + ApiEndPoint.addNewCustomer, data)
+  }
+
 }

@@ -24,3 +24,5 @@ export * from './income/create-invoice/create-invoice.component';
 export * from './income/quotations/quotations.component';
 export * from './income/time-recording/time-recording.component'
 export * from './income/invoice/invoice.component'
+export * from './income/create-customer/create-customer.component'
+export * from './income/add-new-item/add-new-item.component'

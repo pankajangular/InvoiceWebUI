@@ -10,7 +10,7 @@ import { OtpComponent } from './content/pages/auth/otp/otp.component';
 import { AuthGuard } from './core/helpers/auth.guard';
 import { PageNotFoundComponent } from './content/pages/auth/page-not-found/page-not-found.component';
 import { ResetPasswordComponent } from './content/pages/auth/reset-password/reset-password.component';
-import { LinkedUserComponent, CurrencyComponent, EditProfileComponent, ChangePasswordComponent, LogsComponent, CustomerInvoiceComponent, TaxComponent, ItemsComponent, StatementComponent, SignatureComponent, MembershipComponent, InvitePeopleComponent, ContactUsComponent, CreateInvoiceComponent, QuotationsComponent, TimeRecordingComponent, InvoiceComponent } from './content/pages/components';
+import { LinkedUserComponent, CurrencyComponent, EditProfileComponent, ChangePasswordComponent, LogsComponent, CustomerInvoiceComponent, TaxComponent, ItemsComponent, StatementComponent, SignatureComponent, MembershipComponent, InvitePeopleComponent, ContactUsComponent, CreateInvoiceComponent, QuotationsComponent, TimeRecordingComponent, InvoiceComponent, CreateCustomerComponent, AddNewItemComponent } from './content/pages/components';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -41,71 +41,79 @@ const routes: Routes = [
   },
   {
     path: 'linked-user',
-    component: LinkedUserComponent,
+    component: LinkedUserComponent, canActivate: [AuthGuard],
   },
   {
     path: 'currency',
-    component: CurrencyComponent,
+    component: CurrencyComponent, canActivate: [AuthGuard],
   },
   {
     path: 'edit-profile',
-    component: EditProfileComponent,
+    component: EditProfileComponent, canActivate: [AuthGuard],
   },
   {
     path: 'change-password',
-    component: ChangePasswordComponent,
+    component: ChangePasswordComponent, canActivate: [AuthGuard],
   },
   {
     path: 'logs',
-    component: LogsComponent,
+    component: LogsComponent, canActivate: [AuthGuard],
   },
   {
     path: 'customer-invoice',
-    component: CustomerInvoiceComponent,
+    component: CustomerInvoiceComponent, canActivate: [AuthGuard],
   },
   {
     path: 'tax',
-    component: TaxComponent,
+    component: TaxComponent, canActivate: [AuthGuard],
   },
   {
     path: 'items',
-    component: ItemsComponent,
+    component: ItemsComponent, canActivate: [AuthGuard],
   },
   {
     path: 'statement',
-    component: StatementComponent,
+    component: StatementComponent, canActivate: [AuthGuard],
   },
   {
     path: 'signature',
-    component: SignatureComponent,
+    component: SignatureComponent, canActivate: [AuthGuard],
   },
   {
     path: 'membership',
-    component: MembershipComponent,
+    component: MembershipComponent, canActivate: [AuthGuard],
   },
   {
     path: 'invite-people',
-    component: InvitePeopleComponent,
+    component: InvitePeopleComponent, canActivate: [AuthGuard],
   },
   {
     path: 'contact-us',
-    component: ContactUsComponent,
+    component: ContactUsComponent, canActivate: [AuthGuard],
   },
   {
     path: 'invoice',
-    component: InvoiceComponent
+    component: InvoiceComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'create-invoice',
-    component: CreateInvoiceComponent
+    path: 'invoice/add-new-item',
+    component: AddNewItemComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'quotations',
-    component: QuotationsComponent,
+    path: 'invoice/create-customer',
+    component: CreateCustomerComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'time-recording',
-    component: TimeRecordingComponent
+    path: 'invoice/create-invoice',
+    component: CreateInvoiceComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'invoice/quotations',
+    component: QuotationsComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'invoice/time-recording',
+    component: TimeRecordingComponent, canActivate: [AuthGuard]
   },
 
   //Page Not Found Routing

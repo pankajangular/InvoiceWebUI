@@ -3,8 +3,6 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { MustMatch } from 'src/app/core/helpers/must-match.validator';
-import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Component({
@@ -63,7 +61,6 @@ export class ResetPasswordComponent implements OnInit {
     setTimeout(() => {
       const email = localStorage.getItem('email')
       this.authenticationService.resetPassword(this.ResetPasswordOtpForm.controls['otp'].value, email, this.ResetPasswordOtpForm.controls['newpassword'].value)
-        .pipe(first())
         .subscribe(
           data => {
             if (data == true) {

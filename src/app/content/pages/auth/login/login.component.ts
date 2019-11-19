@@ -4,7 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { first } from 'rxjs/operators';
 
 
 @Component({
@@ -56,7 +55,6 @@ export class LoginComponent implements OnInit {
     this.spinner.show();
     setTimeout(() => {
       this.authenticationService.login(this.loginForm.value)
-        .pipe(first())
         .subscribe(
           data => {
             if (data == true) {

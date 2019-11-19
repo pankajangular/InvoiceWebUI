@@ -3,7 +3,6 @@ import { ToastrService } from 'ngx-toastr';
 import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 @Component({
   selector: 'forgot-password-page',
@@ -34,7 +33,6 @@ export class ForgotPasswordComponent implements OnInit {
     this.spinner.show();
     setTimeout(() => {
       this.authenticationService.forgotPassword(this.forgotPasswordForm.value)
-        .pipe(first())
         .subscribe(
           data => {
             if (data == true) {

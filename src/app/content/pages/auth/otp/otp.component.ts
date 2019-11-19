@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
-import { first } from 'rxjs/operators';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -32,7 +31,6 @@ export class OtpComponent implements OnInit {
     this.spinner.show();
     setTimeout(() => {
       this.userService.onVerify(this.verifyOtpForm.controls['otp'].value)
-        .pipe(first())
         .subscribe(
           data => {
             console.log(data);
