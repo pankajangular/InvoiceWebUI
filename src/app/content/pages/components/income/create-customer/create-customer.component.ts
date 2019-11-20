@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { NgxSpinnerService } from 'ngx-spinner';
 import { IncomeService } from 'src/app/core/services/income.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-create-customer',
@@ -12,9 +13,22 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CreateCustomerComponent implements OnInit {
   customerForm: FormGroup;
+  customerListForm: FormGroup;
   submitted: boolean;
+  customersList: [];
 
-  constructor(private formBuilder: FormBuilder, private toaster: ToastrService, private spinner: NgxSpinnerService, private incomeService: IncomeService) { }
+  constructor(private formBuilder: FormBuilder,
+    private toaster: ToastrService,
+    config: NgbModalConfig,
+    private modalService: NgbModal,
+    private spinner: NgxSpinnerService,
+    private incomeService: IncomeService) {
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
+  openCreateNewCustomer(content) {
+    this.modalService.open(content, { windowClass: 'my-class' });
+  }
   ngOnInit() {
     this.customerForm = this.formBuilder.group({
       bussinessName: new FormControl('', Validators.required),
@@ -31,7 +45,13 @@ export class CreateCustomerComponent implements OnInit {
       city: new FormControl(''),
       postalcode: new FormControl(''),
       fax: new FormControl(''),
-    })
+    }),
+      this.customerListForm = this.formBuilder.group({
+        pageNumber: new FormControl(1),
+        pageSize: new FormControl(10),
+        searchQuery: new FormControl(null),
+      });
+    this.getCustomersList();
   }
 
   get f() { return this.customerForm.controls; }
@@ -55,8 +75,17 @@ export class CreateCustomerComponent implements OnInit {
               this.toaster.error(data.message);
             }
             this.customerForm.reset();
+            this.modalService.dismissAll();
             this.spinner.hide();
           });
     }, 2000);
+  }
+
+
+  getCustomersList() {
+    this.incomeService.getCustomersList(this.customerListForm.value).subscribe((data) => {
+      console.log(data.customerList.dataList);
+      this.customersList = data.customerList.dataList;
+    })
   }
 }

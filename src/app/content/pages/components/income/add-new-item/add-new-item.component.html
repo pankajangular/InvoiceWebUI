@@ -3,16 +3,17 @@
   <div class="row m-0">
     <div class="col-md-12 p-0">
       <div class="body-content">
+        <ol class="breadcrumb float-right">
+          <button class="btn btn-primary " (click)="openCreateNewItem(content)">Create New Item</button>
+        </ol>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item active" aria-current="page">Add New Item</li>
           </ol>
-          <ol class="breadcrumb float-right">
-            <button class="btn btn-primary float-right" [routerLink]="['/invoice']">Back</button>
-          </ol>
+
         </nav>
         <div class="content-element">
-          <div class="col-md-6 p-0" align="center">
+          <!-- <div class="col-md-6 p-0" align="center">
             <div class="invoice-formin">
               <form class="invoice-form" name="addNewItemForm" [formGroup]="addNewItemForm"
                 (ngSubmit)="addNewItemForm.valid && onClickAddNewItem()">
@@ -69,7 +70,70 @@
                 </div>
               </form>
             </div>
-          </div>
+          </div> -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">ItemId</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Tax</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of itemsList">
+                <th scope="row">{{item.itemId}}</th>
+                <td>{{item.name}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.quantity}}</td>
+                <td>{{item.tax}}</td>
+              </tr>
+            </tbody>
+            <nav aria-label="Page navigation example" class="float-right">
+              <ul class="pagination">
+                <li class="page-item"><a class="page-link" (click)="getValueofpage($event)" id="1">1</a></li>
+                <li class="page-item"><a class="page-link" (click)="getValueofpage($event)" id="2">2</a></li>
+                <li class="page-item"><a class="page-link" (click)="getValueofpage($event)" id="3">3</a></li>
+              </ul>
+            </nav>
+          </table>
+
+          <!-- <ngx-datatable class="material" [rows]="itemsList" [columnMode]="'force'" [headerHeight]="50"
+            [footerHeight]="50" [rowHeight]='"50"' [sorts]="[{prop: 'name', dir: 'desc'}]">
+            <ngx-datatable-column name="Item Id">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.itemId}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Name">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.name}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Description">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.description}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Price">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.price}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Quantity">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.quantity}}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Tax">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.tax}}
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable> -->
         </div>
       </div>
     </div>
@@ -77,3 +141,65 @@
 </section>
 <!--
 Body End -->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header" style="background-color: #005A9C;">
+    <h4 class="modal-title text-white" id="modal-basic-title">Create New Invoice</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="invoice-form" name="addNewItemForm" [formGroup]="addNewItemForm"
+      (ngSubmit)="addNewItemForm.valid && onClickAddNewItem()">
+      <div class="form-group input-effect">
+        <input type="text" class="form-control" formControlName="name" placeholder="Enter Item Name"
+          [ngClass]="{'is-invalid':addNewItemForm.get('name').touched && addNewItemForm.get('name').invalid}" />
+        <div *ngIf="addNewItemForm.get('name').touched && addNewItemForm.get('name').invalid" class="invalid-feedback">
+          <div *ngIf="addNewItemForm.get('name').errors.required">Name is required</div>
+        </div>
+      </div>
+      <div class="form-group input-effect">
+        <textarea class="form-control" formControlName="description" placeholder="Enter Item Description" [ngClass]="{'is-invalid':addNewItemForm.get('description').touched &&
+                    addNewItemForm.get('description').invalid}"> </textarea>
+        <div *ngIf="addNewItemForm.get('description').touched && addNewItemForm.get('description').invalid"
+          class="invalid-feedback">
+          <div *ngIf="addNewItemForm.get('description').errors.required">Description is required</div>
+        </div>
+      </div>
+      <div class="form-group input-effect">
+        <input type="text" OnlyNumber="true" class="form-control" formControlName="quantity"
+          placeholder="Enter Item Quantity" [ngClass]="{'is-invalid':addNewItemForm.get('quantity').touched &&
+                    addNewItemForm.get('quantity').invalid}" />
+        <div *ngIf="addNewItemForm.get('quantity').touched && addNewItemForm.get('quantity').invalid"
+          class="invalid-feedback">
+          <div *ngIf="addNewItemForm.get('quantity').errors.required">Quantity is required</div>
+        </div>
+      </div>
+      <div class="form-group input-effect">
+        <input type="text" class="form-control" OnlyNumber="true" formControlName="price" placeholder="Enter Item Price"
+          [ngClass]="{'is-invalid':addNewItemForm.get('price').touched &&
+                    addNewItemForm.get('price').invalid}" />
+        <div *ngIf="addNewItemForm.get('price').touched && addNewItemForm.get('price').invalid"
+          class="invalid-feedback">
+          <div *ngIf="addNewItemForm.get('price').errors.required">Price is required</div>
+        </div>
+      </div>
+      <div class="form-group input-effect">
+        <select class="form-control" OnlyNumber="true" formControlName="tax" placeholder="Enter Item Tax %"
+          [ngClass]="{'is-invalid':addNewItemForm.get('tax').touched && addNewItemForm.get('tax').invalid}">
+          <option value="" selected disabled>Please select tax type</option>
+          <option value="10">Inclusive (10%)</option>
+          <option value="0">Exclusive (0%)</option>
+        </select>
+        <div *ngIf="addNewItemForm.get('tax').touched && addNewItemForm.get('tax').invalid" class="invalid-feedback">
+          <div *ngIf="addNewItemForm.get('tax').errors.required">Tax is required</div>
+        </div>
+      </div>
+      <div class="form-group text-center">
+        <button class="btn btn-primary" [disabled]="!addNewItemForm.valid"
+          (click)="c('Save click');onClickAddNewItem()">Create
+          Item</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

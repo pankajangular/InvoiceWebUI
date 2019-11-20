@@ -33,7 +33,8 @@ import {
   TimeRecordingComponent,
   InvoiceComponent,
   CreateCustomerComponent,
-  AddNewItemComponent
+  AddNewItemComponent,
+  InvoiceListComponent,
 } from './content/pages/components';
 
 
@@ -89,6 +90,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     InvoiceComponent,
     CreateCustomerComponent,
     AddNewItemComponent,
+    InvoiceListComponent,
   ],
   imports: [
     BrowserModule,

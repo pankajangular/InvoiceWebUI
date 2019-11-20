@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { NgxSpinnerService } from 'ngx-spinner';
 import { IncomeService } from 'src/app/core/services/income.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-new-item',
@@ -11,9 +12,21 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddNewItemComponent implements OnInit {
   addNewItemForm: FormGroup;
+  itemsListForm: FormGroup;
   submitted: boolean;
-  constructor(private formBuilder: FormBuilder, private toaster: ToastrService, private spinner: NgxSpinnerService, private incomeService: IncomeService) { }
-
+  itemsList: [];
+  constructor(private formBuilder: FormBuilder,
+    private toaster: ToastrService,
+    config: NgbModalConfig,
+    private modalService: NgbModal,
+    private spinner: NgxSpinnerService,
+    private incomeService: IncomeService) {
+    config.backdrop = 'static';
+    config.keyboard = false;
+  }
+  openCreateNewItem(content) {
+    this.modalService.open(content, { windowClass: 'my-class' });
+  }
   ngOnInit() {
     this.addNewItemForm = this.formBuilder.group({
       name: new FormControl('', Validators.required),
@@ -22,7 +35,31 @@ export class AddNewItemComponent implements OnInit {
       price: new FormControl([], Validators.required),
       tax: new FormControl([], Validators.required)
     })
+
+    this.itemsListForm = this.formBuilder.group({
+      pageNumber: new FormControl(1),
+      pageSize: new FormControl(10),
+      searchQuery: new FormControl(null),
+    });
+    this.getItemList();
   }
+
+
+  getItemList() {
+    this.incomeService.getitemsList(this.itemsListForm.value).subscribe((data) => {
+      console.log(data.itemList.dataList);
+      this.itemsList = data.itemList.dataList;
+    })
+  }
+  getValueofpage(event) {
+    debugger;
+    console.log(event.target.id)
+    var pageNumber = parseInt(event.target.id)
+    console.log(pageNumber);
+    this.itemsListForm.controls['pageNumber'].setValue(pageNumber);
+  }
+
+
 
   onClickAddNewItem() {
     debugger;
@@ -49,6 +86,7 @@ export class AddNewItemComponent implements OnInit {
               this.toaster.error(data.message);
             }
             this.addNewItemForm.reset();
+            this.getItemList();
             this.spinner.hide();
           });
     }, 2000);

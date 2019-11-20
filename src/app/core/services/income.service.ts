@@ -15,6 +15,13 @@ export class IncomeService {
     return this.http.post<any>(environment.apiUrl + '/' + ApiEndPoint.invoiceList, data);
   }
 
+  getitemsList(data: any): Observable<any> {
+    return this.http.post<any>(environment.apiUrl + '/' + ApiEndPoint.itemList, data);
+  }
+  getCustomersList(data: any): Observable<any> {
+    return this.http.post<any>(environment.apiUrl + '/' + ApiEndPoint.customersList, data);
+  }
+
   createNewItem(name: string, description: string, quantity: number, price: number, tax: number) {
     debugger;
     return this.http.post<any>(environment.apiUrl + '/' + ApiEndPoint.addNewItem, { name, description, quantity, price, tax });
