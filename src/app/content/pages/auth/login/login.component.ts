@@ -54,10 +54,12 @@ export class LoginComponent implements OnInit {
 
     this.spinner.show();
     setTimeout(() => {
+      localStorage.setItem('email', this.loginForm.controls['email'].value)
       this.authenticationService.login(this.loginForm.value)
         .subscribe(
           data => {
             if (data == true) {
+              localStorage.removeItem('email');
               this.router.navigateByUrl('/dashboard');
             }
             this.spinner.hide();

@@ -85,6 +85,7 @@ export class CreateCustomerComponent implements OnInit {
     this.spinner.show();
     setTimeout(() => {
       this.incomeService.getCustomersList(this.customerListForm.value).subscribe((data) => {
+        console.log(data.customerList);
         this.customersList = data.customerList.dataList;
         this.spinner.hide();
       })

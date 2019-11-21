@@ -26,16 +26,22 @@ export class AuthenticationService {
   login(user: User) {
     return this.http.post<any>(environment.apiUrl + '/' + ApiEndPoint.login, user)
       .pipe(map(user => {
-        if (user.userstatus) {
+        if (user.success) {
+          debugger
           localStorage.setItem('currentUser', JSON.stringify(user.user_info));
           this.currentUserSubject.next(user.user_info);
           this.toaster.success(user.message);
         }
         else {
-          this.router.navigateByUrl('/login');
+          debugger;
+          if (user.userstatus) {
+            this.router.navigateByUrl('/otp')
+          }
+          else
+            this.router.navigateByUrl('/login');
           this.toaster.error(user.message);
         }
-        return user.userstatus;
+        return user.success;
       }));
   }
 
@@ -73,8 +79,6 @@ export class AuthenticationService {
         return user.userstatus;
       }));
   }
-
-
 
   resetPassword(code: number, email: string, password: string) {
     return this.http.post<any>(environment.apiUrl + '/' + ApiEndPoint.resetPassword, { code, email, password })
