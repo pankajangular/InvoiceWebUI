@@ -57,7 +57,6 @@ export class CreateCustomerComponent implements OnInit {
   get f() { return this.customerForm.controls; }
 
   onCreateCustomer() {
-    debugger;
     this.submitted = true;
     if (this.customerForm.invalid) {
       return;
@@ -83,9 +82,12 @@ export class CreateCustomerComponent implements OnInit {
 
 
   getCustomersList() {
-    this.incomeService.getCustomersList(this.customerListForm.value).subscribe((data) => {
-      console.log(data.customerList.dataList);
-      this.customersList = data.customerList.dataList;
+    this.spinner.show();
+    setTimeout(() => {
+      this.incomeService.getCustomersList(this.customerListForm.value).subscribe((data) => {
+        this.customersList = data.customerList.dataList;
+        this.spinner.hide();
+      })
     })
   }
 }

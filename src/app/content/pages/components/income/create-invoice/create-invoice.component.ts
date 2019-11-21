@@ -1,6 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { IncomeService } from 'src/app/core/services/income.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -15,16 +14,7 @@ export class CreateInvoiceComponent implements OnInit {
   InvoiceList: [];
   customersList: [];
   itemList: [];
-
-  @HostListener('window:scroll', ['$event'])
-  onScroll(e) {
-    console.log('window', e);
-  }
-
-  divScroll(e) {
-    console.log('div App', e);
-  }
-
+  keys: String[];
   constructor(private formBuilder: FormBuilder, private incomeService: IncomeService, config: NgbModalConfig, private modalService: NgbModal) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -48,6 +38,9 @@ export class CreateInvoiceComponent implements OnInit {
         pageSize: new FormControl(10),
         searchQuery: new FormControl(null),
       });
+
+
+
     this.getInvoiceList();
     this.getCustomersList();
     this.getItemList();
@@ -55,27 +48,23 @@ export class CreateInvoiceComponent implements OnInit {
 
   getInvoiceList() {
     this.incomeService.getInvoiceList(this.invoiceListForm.value).subscribe((data) => {
-      console.log(data.invoiceList.dataList);
       this.InvoiceList = data.invoiceList.dataList;
     })
   }
   getItemList() {
     this.incomeService.getitemsList(this.getListForm.value).subscribe((data) => {
-      console.log(data.itemList.dataList);
-      console.log("jnjsfan", data.itemList.dataList);
-      localStorage.setItem('items', data.itemList.dataList);
       this.itemList = data.itemList.dataList;
+      this.keys = Object.keys(this.itemList);
+
     })
   }
 
   onChange(deviceValue) {
-    debugger;
-    console.log(deviceValue.name);
+    console.log(deviceValue);
   }
 
   getCustomersList() {
     this.incomeService.getCustomersList(this.getListForm.value).subscribe((data) => {
-      console.log(data.customerList.dataList);
       this.customersList = data.customerList.dataList;
     })
   }

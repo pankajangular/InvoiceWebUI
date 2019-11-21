@@ -17,13 +17,10 @@ export class JwtInterceptor implements HttpInterceptor {
         }
       });
     }
-
-    console.log(request);
     return next.handle(request).pipe(
       tap(
         event => {
           if (event instanceof HttpResponse) {
-            console.log(event.status);
           }
         },
         error => {

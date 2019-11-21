@@ -23,12 +23,12 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@swimlane/ngx-datatable/index.css",
-              "./node_modules/@swimlane/ngx-datatable/themes/material.css",
-              "./node_modules/@swimlane/ngx-datatable/assets/icons.css",
               "src/styles.css"
+
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/aos/dist/aos.js"
+            ]
           },
           "configurations": {
             "production": {

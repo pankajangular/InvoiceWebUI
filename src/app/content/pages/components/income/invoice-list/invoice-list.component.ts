@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { IncomeService } from 'src/app/core/services/income.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-invoice-list',
@@ -12,7 +13,11 @@ export class InvoiceListComponent implements OnInit {
   invoiceListForm: FormGroup;
   InvoiceList: [];
 
-  constructor(private formBuilder: FormBuilder, private incomeService: IncomeService, config: NgbModalConfig, private modalService: NgbModal) {
+  constructor(private formBuilder: FormBuilder,
+    private incomeService: IncomeService,
+    config: NgbModalConfig,
+    private modalService: NgbModal,
+    private spinner: NgxSpinnerService) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
@@ -34,9 +39,10 @@ export class InvoiceListComponent implements OnInit {
   }
 
   getInvoiceList() {
+    this.spinner.show();
     this.incomeService.getInvoiceList(this.invoiceListForm.value).subscribe((data) => {
-      console.log(data.invoiceList.dataList);
       this.InvoiceList = data.invoiceList.dataList;
+      this.spinner.hide();
     })
   }
 

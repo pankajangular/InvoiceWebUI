@@ -46,13 +46,15 @@ export class AddNewItemComponent implements OnInit {
 
 
   getItemList() {
-    this.incomeService.getitemsList(this.itemsListForm.value).subscribe((data) => {
-      console.log(data.itemList.dataList);
-      this.itemsList = data.itemList.dataList;
+    this.spinner.show();
+    setTimeout(() => {
+      this.incomeService.getitemsList(this.itemsListForm.value).subscribe((data) => {
+        this.itemsList = data.itemList.dataList;
+        this.spinner.hide();
+      })
     })
   }
   getValueofpage(event) {
-    debugger;
     console.log(event.target.id)
     var pageNumber = parseInt(event.target.id)
     console.log(pageNumber);
@@ -62,7 +64,6 @@ export class AddNewItemComponent implements OnInit {
 
 
   onClickAddNewItem() {
-    debugger;
     this.submitted = true;
     var quantity = parseInt(this.addNewItemForm.controls['quantity'].value);
     var price = parseInt(this.addNewItemForm.controls['price'].value);

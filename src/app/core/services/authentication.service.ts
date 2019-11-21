@@ -26,16 +26,13 @@ export class AuthenticationService {
   login(user: User) {
     return this.http.post<any>(environment.apiUrl + '/' + ApiEndPoint.login, user)
       .pipe(map(user => {
-
         if (user.userstatus) {
-          debugger;
           localStorage.setItem('currentUser', JSON.stringify(user.user_info));
-          this.currentUserSubject.next(user.userstatus);
+          this.currentUserSubject.next(user.user_info);
           this.toaster.success(user.message);
         }
         else {
-          debugger;
-          this.router.navigateByUrl('./login');
+          this.router.navigateByUrl('/login');
           this.toaster.error(user.message);
         }
         return user.userstatus;

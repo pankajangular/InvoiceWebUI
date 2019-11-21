@@ -149,22 +149,17 @@
             data-parent="#accordionExample-Invoice">
             <ul class="collapse-Invoice-2">
               <li>
-                <a [routerLink]="['/customer-invoice']" routerLinkActive="router-link-active">
-                  <span>Customer Invoice</span>
+                <a [routerLink]="['invoice/create-customer']" routerLinkActive="router-link-active">
+                  <span>Customer</span>
                 </a>
               </li>
-              <!-- <li>
-                <a [routerLink]="['/invoice']" routerLinkActive="router-link-active">
-                  <span>Invoice Default</span>
-                </a>
-              </li> -->
               <li>
                 <a [routerLink]="['/tax']" routerLinkActive="router-link-active">
                   <span>Tax</span>
                 </a>
               </li>
               <li>
-                <a [routerLink]="['/items']" routerLinkActive="router-link-active">
+                <a [routerLink]="['invoice/add-new-item']" routerLinkActive="router-link-active">
                   <span>Items</span>
                 </a>
               </li>

@@ -1,43 +1,3 @@
-<!--Body Start -->
-<!-- <section class="body-wrap">
-  <div class="row m-0">
-    <div class="col-md-12 p-0">
-      <div class="body-content">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">Invoice List</li>
-          </ol>
-          <ol class="breadcrumb float-right">
-            <button class="btn btn-primary " [routerLink]="['/create-invoice']">Create New Invoice</button>
-          </ol>
-        </nav>
-        <div class="content-element">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Invoice Number</th>
-                <th scope="col">Personal Email</th>
-                <th scope="col">Date</th>
-                <th scope="col">Due Date</th>
-              </tr>
-            </thead>
-            <tbody *ngFor="let item of InvoiceList">
-              <tr>
-                <td>{{item.invoiceNumber}}</td>
-                <td>{{item.personalEmail}}</td>
-                <td>{{item.date}}</td>
-                <td>{{item.dueDate}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
-<!--
-Body End -->
-<!--Body Start -->
 <section class="body-wrap">
   <div class="row m-0">
     <div class="col-md-12 p-0">
@@ -47,47 +7,39 @@ Body End -->
             <li class="breadcrumb-item active" aria-current="page">Invoice</li>
           </ol>
         </nav>
-        <div class="content-element">
+        <div class="content-element" data-aos="fade-up">
           <div class="content-element invoice-Management">
             <div class="row">
-              <div class="col-md-3" [routerLink]="['/invoice/add-new-item']">
+              <!-- <div class="col-md-3" [routerLink]="['/invoice/add-new-item']">
                 <a class="income-status invoice-Management-box">
                   <img src="assets/images/add new item.png">
                   <h4>Create Item</h4>
                 </a>
-              </div>
-              <div class="col-md-3" [routerLink]="['/invoice/create-customer']">
+              </div> -->
+              <!-- <div class="col-md-3" [routerLink]="['/invoice/create-customer']">
                 <a class="income-status invoice-Management-box">
                   <img src="assets/images/customer.png">
                   <h4>Create Customer</h4>
                 </a>
-              </div>
-              <div class="col-md-3" [routerLink]="['/invoice/invoice-list']" routerLinkActive="router-link-active">
+              </div> -->
+              <div class="col-md-4" [routerLink]="['/invoice/invoice-list']" routerLinkActive="router-link-active">
                 <a class="income-status invoice-Management-box">
                   <img src="assets/images/invoice.png">
                   <h4>Create Invoice</h4>
                 </a>
               </div>
-              <div class="col-md-3" [routerLink]="['/invoice/quotations']" routerLinkActive="router-link-active">
+              <div class="col-md-4" [routerLink]="['/invoice/quotations']" routerLinkActive="router-link-active">
                 <a class="income-status invoice-Management-box">
                   <img src="assets/images/quotation.png">
                   <h4>Quotations</h4>
                 </a>
               </div>
-
-            </div>
-          </div>
-        </div>
-        <div class="content-element">
-          <div class="content-element invoice-Management">
-            <div class="row">
-              <div class="col-md-3" [routerLink]="['/invoice/time-recording']" routerLinkActive="router-link-active">
+              <div class="col-md-4" [routerLink]="['/invoice/time-recording']" routerLinkActive="router-link-active">
                 <a class="income-status invoice-Management-box">
                   <img src="assets/images/watch.png">
                   <h4>Time Recording</h4>
                 </a>
               </div>
-
             </div>
           </div>
         </div>
@@ -95,5 +47,3 @@ Body End -->
     </div>
   </div>
 </section>
-<!--
-Body End -->

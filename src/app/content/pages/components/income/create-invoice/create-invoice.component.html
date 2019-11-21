@@ -31,7 +31,8 @@
             <div class="form-group" (scroll)="divScroll($event)">
               <label for="sel1">Select Item:</label>
               <select class="form-control" (change)="onChange($event.target.value)">
-                <option *ngFor="let item of itemList" [value]="item">
+                <option *ngFor="let item of itemList"
+                  [value]='[item.name,item.description,item.quantity,item.price,item.tax]'>
                   {{item.name}}</option>
               </select>
             </div>
