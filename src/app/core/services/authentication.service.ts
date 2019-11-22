@@ -23,17 +23,17 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
 
+
+  // Auth Functions
   login(user: User) {
     return this.http.post<any>(environment.apiUrl + '/' + ApiEndPoint.login, user)
       .pipe(map(user => {
         if (user.success) {
-          debugger
           localStorage.setItem('currentUser', JSON.stringify(user.user_info));
           this.currentUserSubject.next(user.user_info);
           this.toaster.success(user.message);
         }
         else {
-          debugger;
           if (user.userstatus) {
             this.router.navigateByUrl('/otp')
           }

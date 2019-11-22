@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { IncomeService } from 'src/app/core/services/income.service';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-invoice-list',
@@ -17,6 +18,7 @@ export class InvoiceListComponent implements OnInit {
     private incomeService: IncomeService,
     config: NgbModalConfig,
     private modalService: NgbModal,
+    private toaster: ToastrService,
     private spinner: NgxSpinnerService) {
     config.backdrop = 'static';
     config.keyboard = false;
@@ -28,7 +30,6 @@ export class InvoiceListComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.invoiceListForm = this.formBuilder.group({
       pageNumber: new FormControl(1),
       pageSize: new FormControl(10),
@@ -45,5 +46,24 @@ export class InvoiceListComponent implements OnInit {
       this.spinner.hide();
     })
   }
+
+  onEditInvoice(id: number) {
+    this.incomeService.getInvoiceById(id).subscribe((data) => {
+      console.log(data.invoice);
+    })
+  }
+
+  onDeleteInvoice(id: number) {
+    alert("Are you sure want to delete")
+    this.spinner.show();
+    this.incomeService.deleteInvoice(id).subscribe((data) => {
+      console.log(data);
+      this.spinner.hide();
+      this.getInvoiceList();
+      this.toaster.success(data.message);
+    })
+
+  }
+
 
 }

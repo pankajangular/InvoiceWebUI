@@ -53,8 +53,6 @@ import { JwtInterceptor } from './core/helpers';
 //External NPM Packages
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
-import { SettingService } from './core/services/setting.service';
 declare var jQuery: any;
 import * as AOS from 'aos';
 @Component({

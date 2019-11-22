@@ -4,7 +4,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { IncomeService } from 'src/app/core/services/income.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 @Component({
   selector: 'app-add-new-item',
   templateUrl: './add-new-item.component.html',
@@ -20,7 +19,8 @@ export class AddNewItemComponent implements OnInit {
     config: NgbModalConfig,
     private modalService: NgbModal,
     private spinner: NgxSpinnerService,
-    private incomeService: IncomeService) {
+    private incomeService: IncomeService,
+  ) {
     config.backdrop = 'static';
     config.keyboard = false;
   }
@@ -82,6 +82,7 @@ export class AddNewItemComponent implements OnInit {
           data => {
             if (data) {
               this.toaster.success(data.message);
+              this.getItemList();
             }
             else {
               this.toaster.error(data.message);
@@ -92,7 +93,25 @@ export class AddNewItemComponent implements OnInit {
           });
     }, 2000);
   }
+
+
+  onEditItem(id: number) {
+    this.incomeService.getitemById(id).subscribe((data) => {
+      console.log(data);
+    })
+  }
+
+  onDeleteItem(id: number) {
+    alert("Are you sure want to delete")
+    this.spinner.show();
+    this.incomeService.deleteItem(id).subscribe((data) => {
+      this.spinner.hide();
+      this.getItemList();
+      this.toaster.success(data.message);
+    })
+
+  }
+
+
 }
-
-
 

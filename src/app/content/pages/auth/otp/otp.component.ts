@@ -51,4 +51,19 @@ export class OtpComponent implements OnInit {
           });
     }, 2000);
   }
+
+
+  onResendOTP() {
+    this.spinner.show();
+    localStorage.getItem('email');
+    this.userService.onResendOtp().subscribe((data) => {
+      if (data.success) {
+        this.spinner.hide();
+        this.toaster.success(data.message);
+      }
+      else {
+        this.toaster.error(data.error)
+      }
+    })
+  }
 }

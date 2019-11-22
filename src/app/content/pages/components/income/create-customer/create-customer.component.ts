@@ -69,6 +69,7 @@ export class CreateCustomerComponent implements OnInit {
             console.log(data);
             if (data) {
               this.toaster.success(data.message);
+              this.getCustomersList();
             }
             else {
               this.toaster.error(data.message);
@@ -91,4 +92,24 @@ export class CreateCustomerComponent implements OnInit {
       })
     })
   }
+
+
+  onEditCustomer(id: number) {
+    this.incomeService.getCustomerById(id).subscribe((data) => {
+      console.log(data);
+    })
+  }
+
+  onDeleteCustomer(id: number) {
+    alert("Are you sure want to delete")
+    this.spinner.show();
+    this.incomeService.deleteCustomer(id).subscribe((data) => {
+      this.spinner.hide();
+      this.getCustomersList();
+      this.toaster.success(data.message);
+    })
+
+  }
+
+
 }

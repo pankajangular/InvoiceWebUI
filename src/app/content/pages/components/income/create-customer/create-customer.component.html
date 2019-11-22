@@ -109,6 +109,7 @@
                 <th scope="col">Account Number</th>
                 <th scope="col">Address</th>
                 <th scope="col">Country</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -118,6 +119,9 @@
                 <td>{{item.accountNumber}}</td>
                 <td>{{item.address1}}</td>
                 <td>{{item.countryName}}</td>
+                <td><button class="btn btn-primary" (click)="onEditCustomer(item.customerId)">Edit</button>
+                  <button class="btn btn-danger ml-1" (click)="onDeleteCustomer(item.customerId)">Delete</button>
+                </td>
               </tr>
             </tbody>
             <nav aria-label="Page navigation example" class="float-right">
@@ -137,7 +141,7 @@
 Body End -->
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header" style="background-color: #005A9C;">
-    <h4 class="modal-title text-white" id="modal-basic-title">Create New Invoice</h4>
+    <h4 class="modal-title text-white" id="modal-basic-title">Create New Customer</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -146,8 +150,8 @@ Body End -->
     <form class="invoice-form" name="customerForm" [formGroup]="customerForm"
       (ngSubmit)="customerForm.valid && onCreateCustomer()">
       <div class="form-group input-effect">
-        <input type="text" class="form-control" formControlName="bussinessName"
-          placeholder="Enter Customer or Business Name " [ngClass]="{'is-invalid':customerForm.get('bussinessName').touched &&
+        <input type="text" class="form-control" formControlName="bussinessName" placeholder="Enter Company Name "
+          [ngClass]="{'is-invalid':customerForm.get('bussinessName').touched &&
                         customerForm.get('bussinessName').invalid}" />
         <div *ngIf="customerForm.get('bussinessName').touched && customerForm.get('bussinessName').invalid"
           class="invalid-feedback">
@@ -195,7 +199,6 @@ Body End -->
           <div *ngIf="customerForm.get('mobile').errors.required">mobile is required</div>
         </div>
       </div>
-
       <div class="form-group input-effect">
         <input type="text" class="form-control" formControlName="address1" placeholder="Enter address1" [ngClass]="{'is-invalid':customerForm.get('address1').touched
                         &&
