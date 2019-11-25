@@ -30,7 +30,6 @@ export class IncomeService {
 
   // Customer Get ,Create ,Delete,Edit Functions
 
-
   createCustomer(data: any) {
     return this.http.post<any>(environment.apiUrl + '/' + ApiEndPoint.addNewCustomer, data)
   }

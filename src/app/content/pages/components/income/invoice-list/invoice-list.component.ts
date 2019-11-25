@@ -49,7 +49,6 @@ export class InvoiceListComponent implements OnInit {
 
   onEditInvoice(id: number) {
     this.incomeService.getInvoiceById(id).subscribe((data) => {
-      console.log(data.invoice);
     })
   }
 
@@ -57,7 +56,6 @@ export class InvoiceListComponent implements OnInit {
     alert("Are you sure want to delete")
     this.spinner.show();
     this.incomeService.deleteInvoice(id).subscribe((data) => {
-      console.log(data);
       this.spinner.hide();
       this.getInvoiceList();
       this.toaster.success(data.message);

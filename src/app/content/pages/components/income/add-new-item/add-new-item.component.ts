@@ -55,9 +55,7 @@ export class AddNewItemComponent implements OnInit {
     })
   }
   getValueofpage(event) {
-    console.log(event.target.id)
     var pageNumber = parseInt(event.target.id)
-    console.log(pageNumber);
     this.itemsListForm.controls['pageNumber'].setValue(pageNumber);
   }
 
@@ -76,7 +74,6 @@ export class AddNewItemComponent implements OnInit {
     }
     this.spinner.show();
     setTimeout(() => {
-      console.log(this.addNewItemForm.controls['name'].value, this.addNewItemForm.controls['description'].value, this.addNewItemForm.controls['quantity'].value, this.addNewItemForm.controls['price'].value, this.addNewItemForm.controls['tax'].value)
       this.incomeService.createNewItem(this.addNewItemForm.controls['name'].value, this.addNewItemForm.controls['description'].value, this.addNewItemForm.controls['quantity'].value, this.addNewItemForm.controls['price'].value, this.addNewItemForm.controls['tax'].value)
         .subscribe(
           data => {
@@ -97,7 +94,6 @@ export class AddNewItemComponent implements OnInit {
 
   onEditItem(id: number) {
     this.incomeService.getitemById(id).subscribe((data) => {
-      console.log(data);
     })
   }
 

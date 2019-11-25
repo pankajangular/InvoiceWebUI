@@ -33,7 +33,6 @@ export class OtpComponent implements OnInit {
       this.userService.onVerify(this.verifyOtpForm.controls['otp'].value)
         .subscribe(
           data => {
-            console.log(data);
             if (data.success == true) {
               this.router.navigateByUrl('/login');
               localStorage.removeItem('email');

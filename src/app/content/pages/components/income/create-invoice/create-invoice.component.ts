@@ -60,7 +60,6 @@ export class CreateInvoiceComponent implements OnInit {
   }
 
   onChange(deviceValue) {
-    console.log(deviceValue);
   }
 
   getCustomersList() {

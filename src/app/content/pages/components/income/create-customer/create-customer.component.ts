@@ -54,7 +54,7 @@ export class CreateCustomerComponent implements OnInit {
     this.getCustomersList();
   }
 
-  get f() { return this.customerForm.controls; }
+  //Create Customer
 
   onCreateCustomer() {
     this.submitted = true;
@@ -66,7 +66,6 @@ export class CreateCustomerComponent implements OnInit {
       this.incomeService.createCustomer(this.customerForm.value)
         .subscribe(
           data => {
-            console.log(data);
             if (data) {
               this.toaster.success(data.message);
               this.getCustomersList();
@@ -81,24 +80,27 @@ export class CreateCustomerComponent implements OnInit {
     }, 2000);
   }
 
+  //Get Customer List
 
   getCustomersList() {
     this.spinner.show();
     setTimeout(() => {
       this.incomeService.getCustomersList(this.customerListForm.value).subscribe((data) => {
-        console.log(data.customerList);
         this.customersList = data.customerList.dataList;
         this.spinner.hide();
       })
     })
   }
 
+  //Get Customer By Id /Edit
 
   onEditCustomer(id: number) {
     this.incomeService.getCustomerById(id).subscribe((data) => {
-      console.log(data);
     })
   }
+
+
+  //Delete Customer
 
   onDeleteCustomer(id: number) {
     alert("Are you sure want to delete")

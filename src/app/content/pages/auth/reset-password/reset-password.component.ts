@@ -52,7 +52,6 @@ export class ResetPasswordComponent implements OnInit {
 
   onResetPassword() {
     this.submitted = true;
-    console.log(this.ResetPasswordOtpForm.value);
     if (this.ResetPasswordOtpForm.invalid) {
       return;
     }

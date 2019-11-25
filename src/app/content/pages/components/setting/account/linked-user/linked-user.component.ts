@@ -15,7 +15,6 @@ export class LinkedUserComponent implements OnInit {
 
   ngOnInit() {
     this.settingService.getAllLinkedUsers().subscribe((data) => {
-      console.log(data);
       this.linkedUsersList = data;
     })
   }

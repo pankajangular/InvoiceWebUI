@@ -45,13 +45,18 @@ export class AuthenticationService {
       }));
   }
 
+
+
+  // remove user from local storage to log user out
   logout() {
-    // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
     this.router.navigateByUrl('/')
   }
 
+
+
+  //forgot password (If user forgot  password)
   forgotPassword(email: string) {
     return this.http.post<any>(environment.apiUrl + '/' + ApiEndPoint.forgotPassword, email)
       .pipe(map(user => {
@@ -59,13 +64,15 @@ export class AuthenticationService {
           this.toaster.success(user.message);
         }
         else {
-          console.log(user);
           this.toaster.error(user.message);
         }
         return user.userstatus;
       }));
   }
 
+
+
+  //if user want to change password
   changePassword(user: User) {
     return this.http.post<any>(environment.apiUrl + '/' + ApiEndPoint.changePassword, user)
       .pipe(map(user => {
@@ -80,6 +87,10 @@ export class AuthenticationService {
       }));
   }
 
+
+
+
+  //if user want to reset password
   resetPassword(code: number, email: string, password: string) {
     return this.http.post<any>(environment.apiUrl + '/' + ApiEndPoint.resetPassword, { code, email, password })
       .pipe(map(user => {
